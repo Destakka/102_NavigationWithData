@@ -41,4 +41,6 @@ class OrderViewModel : ViewModel() {
 
         return NumberFormat.getNumberInstance().format(kalkulasiHarga)
     }
+
+    fun setContact(listData: MutableList<String>) {}
 }
