@@ -35,7 +35,7 @@ enum class PengelolaHalaman {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun EsJumboApp(
+fun EsJumboAppTopBar(
     bisaNavigasiBack: Boolean,
     navigasiUp: () -> Unit,
     modifier: Modifier = Modifier
@@ -70,9 +70,8 @@ fun EsJumboApp(
 ){
     Scaffold(
         topBar = {
-            EsJumboApp(bisaNavigasiBack = false, navigasiUp = { /*TODO:*/
-            }
-            )
+
+            EsJumboApp()
         }
     ) {innerPadding ->
         val uiState by ViewModel.stateUI.collectAsState()
@@ -82,10 +81,7 @@ fun EsJumboApp(
             modifier = Modifier.padding(innerPadding)
         ){
             composable(route = PengelolaHalaman.Home.name){
-                HalamanHome (
-                    onNextButtonClicked = {
-                        navController.navigate(PengelolaHalaman.Rasa.name)
-                    }
+                HalamanHome (onNextButtonClicked = {navController.navigate(PengelolaHalaman.Rasa.name)}
                 )
             }
 

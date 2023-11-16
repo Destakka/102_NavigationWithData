@@ -1,6 +1,7 @@
 package com.example.pam_act5.ui
 
-
+import android.graphics.fonts.FontFamily
+import android.graphics.fonts.FontStyle
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -21,7 +22,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -29,21 +29,21 @@ import androidx.compose.ui.unit.sp
 import com.example.pam_act5.R
 import com.example.pam_act5.ui.theme.PAM_ACT5Theme
 
+
 @Composable
 fun HalamanHome(
     onNextButtonClicked: () -> Unit
 ) {
-    val image = painterResource(id = R.drawable.poci)
-    Column (
+    val image = painterResource(id = R.drawable.ic_android_black_24dp)
+    Column(
         modifier = Modifier,
         verticalArrangement = Arrangement.SpaceBetween
     ) {
         OutlinedCard(
-            colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.surface
-            ),
-            border = BorderStroke(1.dp, Color.Green), modifier = Modifier
-                .fillMaxWidth(0.95f)
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+            border = BorderStroke(1.dp, Color.Black),
+            modifier = Modifier
+                .fillMaxWidth()
                 .padding(vertical = 50.dp)
                 .align(Alignment.CenterHorizontally)
         ) {
@@ -64,25 +64,25 @@ fun HalamanHome(
                 Text(
                     text = "Poci",
                     color = Color.DarkGray,
-                    fontStyle = FontStyle.Italic,
+                    fontStyle = androidx.compose.ui.text.font.FontStyle.Italic,
                     fontWeight = FontWeight.Bold,
                     fontSize = 60.sp,
                 )
             }
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(dimensionResource(id = R.dimen.padding_medium))
-                    .weight(1f, false),
-                horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_medium)),
-                verticalAlignment = Alignment.Bottom
+        }
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(dimensionResource(R.dimen.padding_medium))
+                .weight(1f, false),
+            horizontalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_medium)),
+            verticalAlignment = Alignment.Bottom
+        ) {
+            Button(
+                modifier = Modifier.weight(1f),
+                onClick = onNextButtonClicked
             ) {
-                Button(
-                    modifier = Modifier.weight(1f),
-                    onClick = onNextButtonClicked
-                ) {
-                    Text(stringResource(R.string.next))
-                }
+                Text(stringResource(R.string.next))
             }
         }
     }
