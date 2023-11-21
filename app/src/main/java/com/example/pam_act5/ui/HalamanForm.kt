@@ -2,6 +2,7 @@ package com.example.pam_act5.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -46,6 +47,7 @@ fun HalamanForm() {
             fontSize = 25.sp,
             fontWeight = FontWeight.Bold
         )
+        Spacer(modifier = Modifier.padding(16.dp))
 
         OutlinedTextField(
             value = textNama,
@@ -55,6 +57,8 @@ fun HalamanForm() {
             onValueChange = { textNama = it },
             label = { Text(text = "Nama") }
         )
+        Spacer(modifier = Modifier.padding(16.dp))
+
         OutlinedTextField(
             value = textAlamat,
             singleLine = true,
@@ -63,6 +67,8 @@ fun HalamanForm() {
             onValueChange = { textAlamat = it },
             label = { Text(text = "Alamat") }
         )
+        Spacer(modifier = Modifier.padding(16.dp))
+
         OutlinedTextField(
             value = textTlp,
             singleLine = true,
@@ -70,6 +76,8 @@ fun HalamanForm() {
             shape = MaterialTheme.shapes.large,
             modifier = Modifier.fillMaxWidth(),
             onValueChange = { textTlp = it },
-            label = { Text(text = "Nomor Telepon") })
+            label = { Text(text = "Nomor Telepon") }
+        )
+        Spacer(modifier = Modifier.padding(16.dp))
     }
 }
