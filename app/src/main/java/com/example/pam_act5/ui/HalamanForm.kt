@@ -12,8 +12,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 @Preview
 @Composable
@@ -31,6 +33,10 @@ fun HalamanForm() {
             .padding(16.dp)
             .fillMaxSize()
     ) {
-        Text(text = "Data Pelanggan")
+        Text(text = "Data Pelanggan",)
+        Text(
+            text = "Data Pelanggan",
+            fontSize = 25.sp,
+            fontWeight = FontWeight.Bold)
     }
 }
