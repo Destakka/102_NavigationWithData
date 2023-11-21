@@ -18,6 +18,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.sp
 import com.example.pam_act5.R
 import com.example.pam_act5.data.OrderUIState
 import com.example.pam_act5.ui.komponen.FormatLabelHarga
@@ -48,7 +49,8 @@ fun HalamanDua (
             items.forEach { item -> Column {
                 Text(item.first.uppercase())
                 Text(text = item.second.toString(),
-                    fontWeight = FontWeight.Bold)
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 20.sp)
             }
                 Divider(thickness = dimensionResource(R.dimen.thickness_divider))
             }

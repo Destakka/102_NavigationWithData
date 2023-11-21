@@ -118,7 +118,7 @@ private fun cancelOrderAndNavigateToForm(
     navController: NavHostController
 ) {
     viewModel.resetOrder()
-    navController.popBackStack(PengelolaHalaman.Home.name, inclusive = false)
+    navController.popBackStack(PengelolaHalaman.Formulir.name, inclusive = false)
 }
 private fun cancelOrderAndNavigateToRasa(
     navController: NavHostController
