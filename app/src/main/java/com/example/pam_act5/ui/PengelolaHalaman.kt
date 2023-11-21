@@ -29,88 +29,99 @@ import com.example.pam_act5.data.SumberData.flavors
 
 enum class PengelolaHalaman {
     Home,
-    Rasa,
-    Summary,
     Formulir,
+    Rasa,
+    Summary
 }
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun EsJumboAppTopBar(
+fun EsJumboAppBar(
     bisaNavigasiBack: Boolean,
     navigasiUp: () -> Unit,
     modifier: Modifier = Modifier
-){
+) {
     TopAppBar(
-        title = { Text(stringResource(R.string.app_name))},
-        colors = TopAppBarDefaults.mediumTopAppBarColors(
-            containerColor = MaterialTheme.colorScheme.primaryContainer
-        ),
+        title = { Text(stringResource(id = R.string.app_name)) },
+        colors = TopAppBarDefaults.mediumTopAppBarColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
         modifier = modifier,
         navigationIcon = {
-            if (bisaNavigasiBack){
-                IconButton(
-                    onClick = {
-                        navigasiUp
-                    }
-                ) {
-                    Icon(imageVector = Icons.Filled.ArrowBack,
-                        contentDescription = stringResource(R.string.back_button))
+            if (bisaNavigasiBack) {
+                IconButton(onClick = navigasiUp) {
+                    Icon(
+                        imageVector = Icons.Filled.ArrowBack,
+                        contentDescription = stringResource(R.string.back_button)
+                    )
                 }
             }
         }
     )
 }
-
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun EsJumboApp(
-    ViewModel: OrderViewModel = viewModel(),
+    viewModel: OrderViewModel = viewModel(),
     navController: NavHostController = rememberNavController()
-){
-    Scaffold(
-        topBar = {
-
-            EsJumboApp()
-        }
-    ) {innerPadding ->
-        val uiState by ViewModel.stateUI.collectAsState()
+) {
+    Scaffold(topBar = {
+        EsJumboAppBar(
+            bisaNavigasiBack = false,
+            navigasiUp = { /*TODO: implement back navigation*/
+            }
+        )
+    }
+    ) {
+            innerPadding -> val uiState by viewModel.stateUI.collectAsState()
         NavHost(
             navController = navController,
             startDestination = PengelolaHalaman.Home.name,
-            modifier = Modifier.padding(innerPadding)
-        ){
-            composable(route = PengelolaHalaman.Home.name){
-                HalamanHome (onNextButtonClicked = {navController.navigate(PengelolaHalaman.Rasa.name)}
+            modifier = Modifier.padding(innerPadding))
+        {
+            composable(route = PengelolaHalaman.Home.name) {
+                HalamanHome(
+                    onNextButtonClicked = {navController.navigate(PengelolaHalaman.Formulir.name)}
                 )
             }
 
-            composable(route = PengelolaHalaman.Rasa.name){
-                val context = LocalContext.current
-                HalamanSatu(
-                    pilihanRasa = flavors.map { id -> context.resources.getString(id) },
-                    onSelectionChanged = { ViewModel.setRasa(it)},
-                    onConfirmButtonClicked = {ViewModel.setJumlah(it)},
-                    onNextButtonClicked = {navController.navigate(PengelolaHalaman.Summary.name)},
-                    onCancelButtonClicked = {cancelOrderAndNavigateToHome(
-                        ViewModel,
-                        navController
-                    )})
+            composable(route = PengelolaHalaman.Formulir.name) {
+                HalamanForm(
+                    onSubmitButtonClick = {
+                        viewModel.setContact(it)
+                        navController.navigate(PengelolaHalaman.Rasa.name)},
+                    onCancelButtonClick = { }
+                )
             }
 
-            composable(route = PengelolaHalaman.Summary.name){
-                HalamanDua(orderUiState = uiState, onCancelButtonCLicked = { cancelOrderAndNavigateToRasa(navController) })
+            composable(route = PengelolaHalaman.Rasa.name) {
+                val context = LocalContext.current
+                HalamanSatu(
+                    pilihanRasa = flavors.map { id ->
+                        context.resources.getString(id)
+                    },
+                    onSelectionChanged = { viewModel.setRasa(it) },
+                    onConfirmButtonClicked = { viewModel.setJumlah(it) },
+                    onNextButtonClicked = { navController.navigate(PengelolaHalaman.Summary.name) },
+                    onCancelButtonClicked = { cancelOrderAndNavigateToHome(viewModel, navController) }
+                )
+            }
+
+            composable(route = PengelolaHalaman.Summary.name) {
+                HalamanDua(
+                    orderUiState = uiState,
+                    onCancelButtonCLicked = { cancelOrderAndNavigateToRasa(navController) },
+                )
             }
         }
     }
 }
-
-private fun cancelOrderAndNavigateToRasa(navController: NavHostController) {
-    navController.popBackStack(PengelolaHalaman.Rasa.name,inclusive = false)
-}
-
-private fun cancelOrderAndNavigateToHome(viewModel: OrderViewModel, navController: NavHostController) {
+private fun cancelOrderAndNavigateToHome(
+    viewModel: OrderViewModel,
+    navController: NavHostController
+) {
     viewModel.resetOrder()
     navController.popBackStack(PengelolaHalaman.Home.name, inclusive = false)
+}
+private fun cancelOrderAndNavigateToRasa(
+    navController: NavHostController
+) {
+    navController.popBackStack(PengelolaHalaman.Rasa.name, inclusive = false)
 }
