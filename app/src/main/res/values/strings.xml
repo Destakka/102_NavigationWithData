@@ -18,4 +18,5 @@
     <string name="nama">Nama</string>
     <string name="alamat">Alamat</string>
     <string name="notlp">Nomor Telepon</string>
+    <string name="submit">Selanjutnya</string>
 </resources>
