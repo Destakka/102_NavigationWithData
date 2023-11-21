@@ -30,7 +30,8 @@ import com.example.pam_act5.data.SumberData.flavors
 enum class PengelolaHalaman {
     Home,
     Rasa,
-    Summary
+    Summary,
+    Formulir,
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
