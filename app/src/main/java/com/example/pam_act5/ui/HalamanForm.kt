@@ -87,18 +87,14 @@ fun HalamanForm(
         Spacer(modifier = Modifier.padding(16.dp))
 
         Row {
-            Button(onClick = { /*TODO*/ }) {
-                Button(onClick = { onCancelButtonClick(ListDataTxt) }) {
-                    Text(text = stringResource(id = R.string.cancle))
-                }
+            Button(onClick = { onCancelButtonClick(ListDataTxt) }) {
+                Text(text = stringResource(id = R.string.cancle))
+            }
 
                 Spacer(modifier = Modifier.padding(50.dp))
 
-                Button(onClick = { /*TODO*/ }) {
-                    Button(onClick = { onSubmitButtonClick(ListDataTxt) }) {
-                        Text(text = stringResource(id = R.string.submit))
-                    }
-                }
+            Button(onClick = { onSubmitButtonClick(ListDataTxt) }) {
+                Text(text = stringResource(id = R.string.submit))
             }
         }
     }
